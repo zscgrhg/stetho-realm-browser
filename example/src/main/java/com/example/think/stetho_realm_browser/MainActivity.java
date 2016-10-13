@@ -1,21 +1,19 @@
 package com.example.think.stetho_realm_browser;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 
 import java.util.Date;
-import java.util.List;
 import java.util.Random;
 
 import io.realm.Realm;
-import io.realm.RealmResults;
 
 public class MainActivity extends AppCompatActivity {
+    public static final Random random = new Random();
     private Realm realm1;
     private Realm realm2;
-    public static final Random random = new Random();
 
     @Override
     protected void onDestroy() {
@@ -45,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
                 user.setUuid(Integer.toString(random.nextInt(10000)));
                 realm.copyToRealm(user);
 
-                Book book=new Book();
+                Book book = new Book();
                 book.setPublishDate(new Date());
                 book.setTitle(Names.LAST_NAME[random.nextInt(Names.LAST_NAME.length)]);
                 realm.copyToRealm(book);
@@ -63,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
                 user.setAge(random.nextInt(100));
                 user.setUuid(Integer.toString(random.nextInt(10000)));
                 realm.copyToRealm(user);
-                Book book=new Book();
+                Book book = new Book();
                 book.setPublishDate(new Date());
                 book.setTitle(Names.LAST_NAME[random.nextInt(Names.LAST_NAME.length)]);
                 realm.copyToRealm(book);

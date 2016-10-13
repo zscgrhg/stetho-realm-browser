@@ -46,6 +46,15 @@ apply plugin: 'com.novoda.bintray-release'
 apply plugin: 'maven-publish'
 
 publishing {
+    publications {
+        maven(MavenPublication) {
+            groupId = 'com.zscgrhg.devtools'
+            artifactId = project.name
+            version = '0.0.1'
+            artifact source: file("${project.buildDir}/outputs/aar/${project.name}-release.aar")
+        }
+    }
+
     repositories {
         maven {
             url "file:${rootDir}/maven-repo"
@@ -55,7 +64,7 @@ publishing {
 publish {
     groupId = 'com.zscgrhg.devtools'
     artifactId = project.name
-    version = android.defaultConfig.versionName
+    version = '0.0.1'
     description = 'realm browser for android'
     website = 'https://github.com/zscgrhg/stetho-realm-browser'
     issueTracker = 'https://github.com/zscgrhg/stetho-realm-browser/issues'
