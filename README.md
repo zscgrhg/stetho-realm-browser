@@ -93,7 +93,7 @@ Click the Hyperlink inspect
 
 ###Console Query Guild
 
-1. ls user
+1. \>*ls user*
 
     results in:
    
@@ -101,24 +101,24 @@ Click the Hyperlink inspect
     realm.where(User.class).findAll()
     ```
     
-    ls user{age:18}
+    \>*ls user{age:18}*
     
     results in:
     
     ```
     realm.where(User.class).equalTo("age",18).findAll()
     ```
-    the followed json '{age:18},{name:obama}' Explained as Query Condition:
+    the followed json **{age:18},{name:obama}** Explained as Query Condition:
     
-    ls user{age:18},{name:obama}
+    \>*ls user{age:18},{name:obama}*
     
     ```
     realm.where(User.class).equalTo("age",18).or().equalTo("name","obama").findAll()
     ```
     
-    variants: select / get / list / show / ls
+    **variants: select / get / list / show / ls**
     
-2. mk user{name:abc,age:18}
+2. \>*mk user{name:abc,age:18}*
 
     results in:
     
@@ -130,9 +130,9 @@ Click the Hyperlink inspect
     realm.commitTransaction();
     ```
     
-    variants: insert / new / add / make / mk
+    **variants: insert / new / add / make / mk**
     
-3. rm user{}
+3. \>*rm user{}*
 
     results in:
     
@@ -141,7 +141,7 @@ Click the Hyperlink inspect
     results.deleteAllFromRealm()
     ```
     
-    rm user{age:10}
+    \>*rm user{age:10}*
     
     results in:
     
@@ -152,9 +152,9 @@ Click the Hyperlink inspect
     results.deleteAllFromRealm()
     ```
     
-    variants: delete / del / rm
+    **variants: delete / del / rm**
     
-4. set user{age:18},{name:obama}
+4. \>*set user{age:18},{name:obama}*
     
     results in:(the first json is the values to update,then the query condition)
     
@@ -165,6 +165,8 @@ Click the Hyperlink inspect
     }    
     ```
     
-    variants: let / set / update
+    **variants: let / set / update**
+    
+5. Unfinished...
 
 
