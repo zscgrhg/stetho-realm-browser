@@ -91,20 +91,25 @@ Click the Hyperlink inspect
 
 ###Console Query Guild
 
-1. ls user 
-    results in:
+1. ls user
+
+   results in:
     ```
     realm.where(User.class).findAll()
     ```
-    ls user{age:18} 
+    ls user{age:18}
+    
     results in:
+    
     ```
     realm.where(User.class).equalTo("age",18).findAll()
     ```
     the followed json '{age:18}' Explained as Query Condition
     Unfinished...
 2. mk user{name:abc,age:18}
+
     results in:
+    
     ```
     realm.beginTransaction();
     User user=realm.createObject(User.class);
@@ -113,13 +118,17 @@ Click the Hyperlink inspect
     realm.commitTransaction();
     ```
 3. rm user{}
+
     results in:
+    
     ```
     RealmResults<User> results = realm.where(User.class).findAll();
     results.deleteAllFromRealm()
     ```
     rm user{age:10}
+    
     results in:
+    
     ```
     RealmResults<User> results = realm.where(User.class)
     .equalTo("age",10)
