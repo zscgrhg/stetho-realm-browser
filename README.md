@@ -15,7 +15,7 @@ repositories {
 dependencies {
     
     compile 'com.facebook.stetho:stetho:1.4.1'
-    compile 'com.zscgrhg.devtools:tools:1.0'
+    compile 'com.zscgrhg.devtools:tools:0.0.1'
     
 }
 ```
@@ -93,6 +93,8 @@ Click the Hyperlink inspect
 
 ###Console Query Guild
 
+######Format: [command] [table name] [Well-formed json args]
+
 1. \>*ls user*
 
     results in:
@@ -167,6 +169,61 @@ Click the Hyperlink inspect
     
     **variants: let / set / update**
     
-5. Unfinished...
+5. *conditions : eq / gt / gte / lt / lte / lk / ilk / isnull / notnull / limit / sort*
+    
+    \>*ls user{gt:{age:52},lk:{name:obama}},{lt:{age:24},ilk:{name:jax}}*
+    
+    results in:
+    
+    ```
+    realm.where(User.class)
+                            .greaterThan("age", 52)
+                            .contains("name", "obama",Case.SENSITIVE)
+                            .or()
+                            .beginGroup()
+                            .lessThan("age", 24)
+                            .contains("name", "jax", Case.INSENSITIVE)
+                            .endGroup()
+                            .findAll();
+    ```
+    
+    \>*ls user{gt:{age:52},lk:{name:obama}},{lt:{age:24},ilk:{name:jax},{limit:[3,5]}}*
+    
+    results in:
+    
+    ```
+     realm.where(User.class)
+                            .greaterThan("age", 52)
+                            .contains("name", "obama",Case.SENSITIVE)
+                            .or()
+                            .beginGroup()
+                            .lessThan("age", 24)
+                            .contains("name", "jax", Case.INSENSITIVE)
+                            .endGroup()
+                            .findAll()
+                            .subList(3,5);
+    ```
+
+    
+    \>*ls user{gt:{age:52},lk:{name:obama}},{lt:{age:24},ilk:{name:jax},{limit:[3,5],sort:[name,-age]}}*
+    
+    results in:
+    
+    ```
+    realm.where(User.class)
+                            .greaterThan("age", 52)
+                            .contains("name", "obama",Case.SENSITIVE)
+                            .or()
+                            .beginGroup()
+                            .lessThan("age", 24)
+                            .contains("name", "jax", Case.INSENSITIVE)
+                            .endGroup()
+                            .findAll()
+                            .sort(new String[]{"name","age"},new Sort[]{Sort.ASCENDING,Sort.DESCENDING})
+                            .subList(3,5);
+    ```
+    
+    the leading '-' means Sort.DESCENDING,default is Sort.ASCENDING
+    
 
 
