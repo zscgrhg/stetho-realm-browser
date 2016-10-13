@@ -53,11 +53,11 @@ publishing {
     }
 }
 publish {
-    groupId = 'com.zscgrhg'
+    groupId = 'com.zscgrhg.devtools'
     artifactId = project.name
     version = android.defaultConfig.versionName
     description = 'realm browser for android'
-    website = 'https://github.com/zscgrhg/Realm-Stetho-Viewer-Master'
-    issueTracker = 'https://github.com/zscgrhg/Realm-Stetho-Viewer-Master/issues'
-    repository = 'https://github.com/zscgrhg/Realm-Stetho-Viewer-Master.git'
+    website = 'https://github.com/zscgrhg/stetho-realm-browser'
+    issueTracker = 'https://github.com/zscgrhg/stetho-realm-browser/issues'
+    repository = 'https://github.com/zscgrhg/stetho-realm-browser.git'
 }

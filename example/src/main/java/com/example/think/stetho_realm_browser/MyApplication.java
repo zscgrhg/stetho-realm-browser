@@ -7,11 +7,16 @@ import com.facebook.stetho.Stetho;
 
 import io.realm.Realm;
 
+import static com.example.think.stetho_realm_browser.RealmSchemas.SCHEMA_1;
+import static com.example.think.stetho_realm_browser.RealmSchemas.SCHEMA_2;
+
 /**
  * Created by THINK on 2016/10/11.
  */
 
 public class MyApplication extends Application {
+
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -21,7 +26,7 @@ public class MyApplication extends Application {
                 Stetho.newInitializerBuilder(this)
                         .enableDumpapp(Stetho.defaultDumperPluginsProvider(this))
                         .enableWebKitInspector(
-                                RealmSupport.addRealmsToStethoDefaults(this,RealmSchemas.SCHEMA_1,RealmSchemas.SCHEMA_2))
+                                RealmSupport.addRealmsToStethoDefaults(this, SCHEMA_1, SCHEMA_2))
                         .build());
     }
 }
