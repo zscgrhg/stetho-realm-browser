@@ -223,7 +223,7 @@ Click the Hyperlink inspect
                             .subList(3,5);
     ```
     
-    the leading '-' means Sort.DESCENDING,default is Sort.ASCENDING
+    the leading '*-*' means *Sort.DESCENDING* ,default is *Sort.ASCENDING*
     
 
 
