@@ -81,7 +81,9 @@ public class MyApplication extends Application {
 ###Let's try it,Run The project(":example") In Android Studio 
  
 Open Chrome to [chrome://inspect/#devices](chrome://inspect/#devices)
+
 Click the Hyperlink inspect
+
 ![screenshot1](https://github.com/zscgrhg/stetho-realm-browser/blob/master/inspect.bmp)
 
 ######databases
@@ -106,9 +108,15 @@ Click the Hyperlink inspect
     ```
     realm.where(User.class).equalTo("age",18).findAll()
     ```
-    the followed json '{age:18}' Explained as Query Condition
+    the followed json '{age:18},{name:obama}' Explained as Query Condition:
     
-    Unfinished...
+    ls user{age:18},{name:obama}
+    
+    ```
+    realm.where(User.class).equalTo("age",18).or().equalTo("name","obama").findAll()
+    ```
+    
+    variants: select / get / list / show / ls
     
 2. mk user{name:abc,age:18}
 
@@ -121,6 +129,8 @@ Click the Hyperlink inspect
     user.setAge(18);
     realm.commitTransaction();
     ```
+    
+    variants: insert / new / add / make / mk
     
 3. rm user{}
 
@@ -141,5 +151,20 @@ Click the Hyperlink inspect
     .findAll();
     results.deleteAllFromRealm()
     ```
+    
+    variants: delete / del / rm
+    
+4. set user{age:18},{name:obama}
+    
+    results in:(the first json is the values to update,then the query condition)
+    
+    ```
+    RealmResults<User> results=realm.where(User.class).equalTo("name","obama").findAll()
+    for(User user:results){
+        user.setAge(18)
+    }    
+    ```
+    
+    variants: let / set / update
 
 
