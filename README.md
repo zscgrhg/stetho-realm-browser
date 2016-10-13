@@ -80,3 +80,47 @@ public class MyApplication extends Application {
 
 ###Let's try it,Run The project(":example") In Android Studio
 
+######databases
+![screenshot1](https://github.com/zscgrhg/stetho-realm-browser/blob/master/realm1.bmp)
+######console
+![screenshot2](https://github.com/zscgrhg/stetho-realm-browser/blob/master/realm2.bmp)
+
+###Console Query Guild
+
+1. ls user 
+    results in:
+    ```
+    realm.where(User.class).findAll()
+    ```
+    ls user{age:18} 
+    results in:
+    ```
+    realm.where(User.class).equalTo("age",18).findAll()
+    ```
+    the followed json '{age:18}' Explained as Query Condition
+    Unfinished...
+2. mk user{name:abc,age:18}
+    results in:
+    ```
+    realm.beginTransaction();
+    User user=realm.createObject(User.class);
+    user.setName("abc");
+    user.setAge(18);
+    realm.commitTransaction();
+    ```
+3. rm user{}
+    results in:
+    ```
+    RealmResults<User> results = realm.where(User.class).findAll();
+    results.deleteAllFromRealm()
+    ```
+    rm user{age:10}
+    results in:
+    ```
+    RealmResults<User> results = realm.where(User.class)
+    .equalTo("age",10)
+    .findAll();
+    results.deleteAllFromRealm()
+    ```
+
+

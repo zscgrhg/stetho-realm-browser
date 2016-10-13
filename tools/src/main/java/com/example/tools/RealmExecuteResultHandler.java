@@ -63,10 +63,9 @@ import static com.example.tools.RealmQueryUtil.getFirstWord;
 
 public class RealmExecuteResultHandler {
 
+    public static final String JSON_FORMAT_ERR = "Json format is invalid";
     final Context context;
     final RealmConfiguration realmConfiguration;
-    public static final String JSON_FORMAT_ERR = "Json format is invalid";
-
     private final Map<String, Class<? extends RealmModel>> modelMap;
     private final Map<String, RealmModelHandler> modelHandlerMap;
 
@@ -84,6 +83,41 @@ public class RealmExecuteResultHandler {
             String modelName = modelClass.getSimpleName().toLowerCase();
             mModelMap.put(modelName, modelClass);
             mModelHandlerMap.put(modelName, new RealmModelHandler(modelClass));
+        }
+    }
+
+    public static String getAndCheckTableName(RealmQueryString seq) {
+        String tableName = seq.nextToken();
+        if (tableName == null || tableName.isEmpty()) {
+            Errors.requireTableName();
+        }
+        return tableName;
+    }
+
+    private static void copyField(JSONObject param, RealmModel model, RealmModelHandler realmModelHandler) throws Exception {
+
+        Iterator<String> keys = param.keys();
+        while (keys.hasNext()) {
+            String fieldName = keys.next();
+            Object fieldValue = param.get(fieldName);
+            Method method = realmModelHandler.propertySetter.get(fieldName.toLowerCase());
+            Field field = realmModelHandler.allFields.get(fieldName);
+            if (method != null) {
+                Convertor convertor = Convertor.getConvertor(fieldValue.getClass(), method.getParameterTypes()[0]);
+                if (convertor != null) {
+                    fieldValue = convertor.convert(fieldValue);
+                }
+                method.invoke(model, fieldValue);
+            } else if (field != null && realmModelHandler.isPropertyField(field)) {
+                Convertor convertor = Convertor.getConvertor(fieldValue.getClass(), field.getType());
+                if (convertor != null) {
+                    fieldValue = convertor.convert(fieldValue);
+                }
+                field.set(model, fieldValue);
+            } else {
+                Errors.fieldNotFound(fieldName);
+            }
+
         }
     }
 
@@ -223,40 +257,6 @@ public class RealmExecuteResultHandler {
         }
     }
 
-    private class Order {
-        public final String fieldName;
-        public final boolean asc;
-
-        public Order(String param) {
-            String trim = param.trim();
-            if (trim.startsWith("-")) {
-                this.asc = false;
-                this.fieldName = trim.substring(1);
-            } else {
-                this.asc = true;
-                this.fieldName = trim;
-            }
-        }
-
-    }
-
-    public class LimitAndOrder {
-        int[] limit = new int[0];
-        List<Order> order = new ArrayList<>();
-
-        public int[] getLimit() {
-            return limit;
-        }
-
-        public void setLimit(int[] limit) {
-            this.limit = limit;
-        }
-
-        public List<Order> getOrder() {
-            return order;
-        }
-    }
-
     private void extractLimitAndOrder(JSONObject jsonObject, LimitAndOrder limitAndOrder) throws JSONException {
         if (jsonObject.has(LIMIT)) {
             JSONArray jsonArray = jsonObject.getJSONArray(LIMIT);
@@ -374,14 +374,6 @@ public class RealmExecuteResultHandler {
         }
     }
 
-    public static String getAndCheckTableName(RealmQueryString seq) {
-        String tableName = seq.nextToken();
-        if (tableName == null || tableName.isEmpty()) {
-            Errors.requireTableName();
-        }
-        return tableName;
-    }
-
     ExecuteSQLResponse handleList(String query) {
 
         RealmQueryString sequence = new RealmQueryString(query);
@@ -404,33 +396,6 @@ public class RealmExecuteResultHandler {
             realm.close();
         }
         return response;
-    }
-
-    private static void copyField(JSONObject param, RealmModel model, RealmModelHandler realmModelHandler) throws Exception {
-
-        Iterator<String> keys = param.keys();
-        while (keys.hasNext()) {
-            String fieldName = keys.next();
-            Object fieldValue = param.get(fieldName);
-            Method method = realmModelHandler.propertySetter.get(fieldName.toLowerCase());
-            Field field = realmModelHandler.allFields.get(fieldName);
-            if (method != null) {
-                Convertor convertor = Convertor.getConvertor(fieldValue.getClass(), method.getParameterTypes()[0]);
-                if (convertor != null) {
-                    fieldValue = convertor.convert(fieldValue);
-                }
-                method.invoke(model, fieldValue);
-            } else if (field != null && realmModelHandler.isPropertyField(field)) {
-                Convertor convertor = Convertor.getConvertor(fieldValue.getClass(), field.getType());
-                if (convertor != null) {
-                    fieldValue = convertor.convert(fieldValue);
-                }
-                field.set(model, fieldValue);
-            } else {
-                Errors.fieldNotFound(fieldName);
-            }
-
-        }
     }
 
     ExecuteSQLResponse handleInsert(String query) {
@@ -550,6 +515,44 @@ public class RealmExecuteResultHandler {
         return modelClass;
     }
 
+    public void test() {
+        Realm realm;
+
+    }
+
+    private class Order {
+        public final String fieldName;
+        public final boolean asc;
+
+        public Order(String param) {
+            String trim = param.trim();
+            if (trim.startsWith("-")) {
+                this.asc = false;
+                this.fieldName = trim.substring(1);
+            } else {
+                this.asc = true;
+                this.fieldName = trim;
+            }
+        }
+
+    }
+
+    public class LimitAndOrder {
+        int[] limit = new int[0];
+        List<Order> order = new ArrayList<>();
+
+        public int[] getLimit() {
+            return limit;
+        }
+
+        public void setLimit(int[] limit) {
+            this.limit = limit;
+        }
+
+        public List<Order> getOrder() {
+            return order;
+        }
+    }
 
     public class RealmModelHandler {
 
