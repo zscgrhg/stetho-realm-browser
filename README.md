@@ -93,10 +93,12 @@ Click the Hyperlink inspect
 
 1. ls user
 
-   results in:
+    results in:
+   
     ```
     realm.where(User.class).findAll()
     ```
+    
     ls user{age:18}
     
     results in:
@@ -105,7 +107,9 @@ Click the Hyperlink inspect
     realm.where(User.class).equalTo("age",18).findAll()
     ```
     the followed json '{age:18}' Explained as Query Condition
+    
     Unfinished...
+    
 2. mk user{name:abc,age:18}
 
     results in:
@@ -117,6 +121,7 @@ Click the Hyperlink inspect
     user.setAge(18);
     realm.commitTransaction();
     ```
+    
 3. rm user{}
 
     results in:
@@ -125,6 +130,7 @@ Click the Hyperlink inspect
     RealmResults<User> results = realm.where(User.class).findAll();
     results.deleteAllFromRealm()
     ```
+    
     rm user{age:10}
     
     results in:
