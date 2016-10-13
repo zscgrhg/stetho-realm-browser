@@ -78,12 +78,16 @@ public class MyApplication extends Application {
 [http://littlerobots.nl/blog/stetho-for-android-debug-builds-only/](http://littlerobots.nl/blog/stetho-for-android-debug-builds-only/)
 
 
-###Let's try it,Run The project(":example") In Android Studio
+###Let's try it,Run The project(":example") In Android Studio 
+ 
+Open Chrome to [chrome://inspect/#devices](chrome://inspect/#devices)
+Click the Hyperlink inspect
+![screenshot1](https://github.com/zscgrhg/stetho-realm-browser/blob/master/inspect.bmp)
 
 ######databases
-![screenshot1](https://github.com/zscgrhg/stetho-realm-browser/blob/master/realm1.bmp)
+![screenshot2](https://github.com/zscgrhg/stetho-realm-browser/blob/master/realm1.bmp)
 ######console
-![screenshot2](https://github.com/zscgrhg/stetho-realm-browser/blob/master/realm2.bmp)
+![screenshot3](https://github.com/zscgrhg/stetho-realm-browser/blob/master/realm2.bmp)
 
 ###Console Query Guild
 
