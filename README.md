@@ -1,4 +1,4 @@
-#A Stetho Expansion Module To Browse Realm-Android Databases In Chrome DevTools's Inspector Window 
+#A Stetho Expansion Module To Browse Realm-Android Databases Through Chrome DevTools 
 
 
 ###Simple to Use
@@ -15,7 +15,7 @@ repositories {
 dependencies {
     
     compile 'com.facebook.stetho:stetho:1.4.1'
-    compile 'com.zscgrhg.devtools:tools:0.0.1'
+    compile 'com.zscgrhg.devtools:tools:0.0.2'
     
 }
 ```
@@ -95,7 +95,7 @@ Click the Hyperlink inspect
 
 ######Format: [command] [table name] [Well-formed json args]
 
-1. \>*ls user*
+1. \>**ls user**
 
     results in:
    
@@ -103,7 +103,7 @@ Click the Hyperlink inspect
     realm.where(User.class).findAll()
     ```
     
-    \>*ls user{age:18}*
+    \>**ls user{age:18}**
     
     results in:
     
@@ -112,7 +112,7 @@ Click the Hyperlink inspect
     ```
     the followed json **{age:18},{name:obama}** Explained as Query Condition:
     
-    \>*ls user{age:18},{name:obama}*
+    \>**ls user{age:18},{name:obama}**
     
     ```
     realm.where(User.class).equalTo("age",18).or().equalTo("name","obama").findAll()
@@ -120,7 +120,7 @@ Click the Hyperlink inspect
     
     **variants: select / get / list / show / ls**
     
-2. \>*mk user{name:abc,age:18}*
+2. \>**mk user{name:abc,age:18}**
 
     results in:
     
@@ -134,7 +134,7 @@ Click the Hyperlink inspect
     
     **variants: insert / new / add / make / mk**
     
-3. \>*rm user{}*
+3. \>**rm user{}**
 
     results in:
     
@@ -143,7 +143,7 @@ Click the Hyperlink inspect
     results.deleteAllFromRealm()
     ```
     
-    \>*rm user{age:10}*
+    \>**rm user{age:10}**
     
     results in:
     
@@ -156,7 +156,7 @@ Click the Hyperlink inspect
     
     **variants: delete / del / rm**
     
-4. \>*set user{age:18},{name:obama}*
+4. \>**set user{age:18},{name:obama}**
     
     results in:(the first json is the values to update,then the query condition)
     
@@ -169,9 +169,9 @@ Click the Hyperlink inspect
     
     **variants: let / set / update**
     
-5. *conditions : eq / gt / gte / lt / lte / lk / ilk / isnull / notnull / limit / sort*
+5. **conditions : eq / gt / gte / lt / lte / lk / ilk / isnull / notnull / limit / sort**
     
-    \>*ls user{gt:{age:52},lk:{name:obama}},{lt:{age:24},ilk:{name:jax}}*
+    \>**ls user{gt:{age:52},lk:{name:obama}},{lt:{age:24},ilk:{name:jax}}**
     
     results in:
     
@@ -187,7 +187,7 @@ Click the Hyperlink inspect
                             .findAll();
     ```
     
-    \>*ls user{gt:{age:52},lk:{name:obama}},{lt:{age:24},ilk:{name:jax},{limit:[3,5]}}*
+    \>**ls user{gt:{age:52},lk:{name:obama}},{lt:{age:24},ilk:{name:jax},{limit:[3,5]}}**
     
     results in:
     
@@ -205,7 +205,7 @@ Click the Hyperlink inspect
     ```
 
     
-    \>*ls user{gt:{age:52},lk:{name:obama}},{lt:{age:24},ilk:{name:jax},{limit:[3,5],sort:[name,-age]}}*
+    \>**ls user{gt:{age:52},lk:{name:obama}},{lt:{age:24},ilk:{name:jax},{limit:[3,5],sort:[name,-age]}}**
     
     results in:
     

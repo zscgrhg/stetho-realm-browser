@@ -1,11 +1,7 @@
 package com.example.tools;
 
-import android.database.sqlite.SQLiteException;
-
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import io.realm.Case;
@@ -105,8 +101,6 @@ public class RealmQueryUtil {
             fieldName = realmModelHandler.getRealFieldName(fieldName);
             if (value == null) {
                 where.isNull(fieldName);
-            } else if (fieldType.getName().equals("java.lang.String")) {
-                where.contains(fieldName, value.toString(), Case.INSENSITIVE);
             } else {
                 Method equalTo = where.getClass().getMethod("equalTo", String.class, getWapperType(fieldType));
                 equalTo.invoke(where, fieldName, value);

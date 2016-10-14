@@ -1,27 +1,12 @@
 package com.example.tools;
 
 import android.database.SQLException;
-import android.database.sqlite.SQLiteException;
-import android.os.Build;
-import android.support.annotation.RequiresApi;
-
-import java.security.spec.PSSParameterSpec;
 
 /**
  * Created by THINK on 2016/10/12.
  */
 
 public class Errors {
-
-    public static class SyntaxException extends SQLException {
-        public SyntaxException() {
-        }
-
-        public SyntaxException(String error) {
-            super(error);
-        }
-
-    }
 
     public static void requireTableName() {
         throw new SyntaxException("table name is required");
@@ -59,5 +44,15 @@ public class Errors {
         throw new SQLException("value Can not be converted: " + value + ",field:  " + fieldName +
                 "expected Type:" + fieldType +
                 " , detail: " + e.getMessage());
+    }
+
+    public static class SyntaxException extends SQLException {
+        public SyntaxException() {
+        }
+
+        public SyntaxException(String error) {
+            super(error);
+        }
+
     }
 }

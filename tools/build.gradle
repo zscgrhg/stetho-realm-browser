@@ -17,11 +17,12 @@ android {
         minSdkVersion 15
         targetSdkVersion 24
         versionCode 1
-        versionName "1.0"
+        versionName "0.0.2"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
     }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -50,7 +51,7 @@ publishing {
         maven(MavenPublication) {
             groupId = 'com.zscgrhg.devtools'
             artifactId = project.name
-            version = '0.0.1'
+            version = android.defaultConfig.versionName
             artifact source: file("${project.buildDir}/outputs/aar/${project.name}-release.aar")
         }
     }
@@ -64,9 +65,10 @@ publishing {
 publish {
     groupId = 'com.zscgrhg.devtools'
     artifactId = project.name
-    version = '0.0.1'
+    version = android.defaultConfig.versionName
     description = 'realm browser for android'
     website = 'https://github.com/zscgrhg/stetho-realm-browser'
     issueTracker = 'https://github.com/zscgrhg/stetho-realm-browser/issues'
     repository = 'https://github.com/zscgrhg/stetho-realm-browser.git'
 }
+
