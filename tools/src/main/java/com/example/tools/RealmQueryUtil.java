@@ -35,10 +35,10 @@ public class RealmQueryUtil {
         int token = -1;
         if (firstSpace > 0) {
             token = firstSpace;
-            if (firstB > 0) {
+            if (firstB >= 0) {
                 token = Math.min(firstB, firstSpace);
             }
-        } else if (firstB > 0) {
+        } else if (firstB >= 0) {
             token = firstB;
         }
 

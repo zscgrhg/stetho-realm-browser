@@ -463,6 +463,15 @@ public class RealmExecuteResultHandler {
                     } catch (Exception e) {
                         Errors.rethrow(e);
                     }
+                    /*try {
+                        List<? extends RealmModel> detached = realm.copyFromRealm(realmModels);
+                        for (RealmModel detachedModel : detached) {
+                            copyField(o, detachedModel, realmModelHandler);
+                        }
+                        realm.copyToRealmOrUpdate(detached);
+                    } catch (Exception e) {
+                        Errors.rethrow(e);
+                    }*/
                 }
             });
 

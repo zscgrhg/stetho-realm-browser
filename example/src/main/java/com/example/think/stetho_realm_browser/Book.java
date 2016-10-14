@@ -3,6 +3,7 @@ package com.example.think.stetho_realm_browser;
 import java.util.Date;
 
 import io.realm.RealmModel;
+import io.realm.annotations.PrimaryKey;
 import io.realm.annotations.RealmClass;
 
 /**
@@ -10,6 +11,9 @@ import io.realm.annotations.RealmClass;
  */
 @RealmClass
 public class Book implements RealmModel {
+    public String oops;
+    @PrimaryKey
+    public String id;
     private String title;
     private Date publishDate;
 
