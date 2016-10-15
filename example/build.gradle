@@ -35,5 +35,5 @@ dependencies {
     testCompile 'junit:junit:4.12'
 }
 
-println android.defaultConfig.jackOptions.enabled
+
 
